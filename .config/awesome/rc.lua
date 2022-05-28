@@ -49,8 +49,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-
+beautiful.init(string.format("%s/.dotfiles/.config/awesome/themes/powerarrow-dark/theme.lua", os.getenv("HOME")))
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "editor"
