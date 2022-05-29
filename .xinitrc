@@ -1,3 +1,4 @@
+xfce4-power-manager &
 nm-applet &
-xrdb --merge ~/.Xresources
+xrdb  ~/.Xresources
 exec awesome
