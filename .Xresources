@@ -1,3 +1,21 @@
+! Font settings
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
+URxvt.font: xft:Firacode-Regular:size=11
+
+! Urxvt settings
+Urxvt*termName: rxvt-unicode-256color
+Urxvt*buffered: false
+Urxvt.saveLines: 2000
+URxvt.intensityStyles: false
+URxvt.scrollBar: false
+
+! Color Scheme: Gruvbox-dark
 ! hard contrast: *background: #1d2021
 *background: #282828
 ! soft contrast: *background: #32302f
@@ -27,6 +45,3 @@
 *color7:  #a89984
 *color15: #ebdbb2
 
-URxvt.intensityStyles: false
-URxvt.font: xft:Firacode-Regular:size=11
-URxvt.scrollBar: false
