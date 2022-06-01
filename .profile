@@ -25,3 +25,20 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Default Apps
+export EDITOR="nvim"
+export TERMINAL="urxvt"
+export BROWSER="firefox-esr"
+export READER="zathura"
+export VISUAL="nvim"
+export VIDEO="mpv"
+export IMAGE="sxiv"
+export COLORTERM="truecolor"
+export OPENER="xdg-open"
+export PAGER="less"
+
+# XDG Paths
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
