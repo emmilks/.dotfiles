@@ -50,10 +50,13 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(string.format("%s/.dotfiles/.config/awesome/themes/powerarrow-dark/theme.lua", os.getenv("HOME")))
--- This is used later as the default terminal and editor to run.
+
+-- Variables for common programs I use
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
+browser = "firefox-esr"
+gui_editor = "emacs"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -341,9 +344,15 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+    -- Rofi Drun
+    awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
+              {description = "show rofi drun menu", group = "launcher"}),
+    -- Firefox
+    awful.key({ modkey }, "w", function() awful.spawn(browser) end,
+              {description = "launch firefox-esr", group = "Web"}),
+    -- Emacs
+    awful.key({ modkey }, "e", function() awful.spawn(gui_editor) end,
+              {description = "launch emacs", group = "Development"})
 )
 
 clientkeys = gears.table.join(
