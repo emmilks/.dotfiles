@@ -57,6 +57,9 @@ editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox-esr"
 gui_editor = "emacs"
+rofi_drun = "rofi -show drun"
+rofi_calc = "rofi -modi \"calc:rofi-calc.sh\" -show calc"
+rofi_power = "rofi-power"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -64,6 +67,7 @@ gui_editor = "emacs"
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+alt = "Mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -344,9 +348,18 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+
+    -- PERSONAL KEYBINDINGS
+
     -- Rofi Drun
-    awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
-              {description = "show rofi drun menu", group = "launcher"}),
+    awful.key({ modkey }, "p", function() awful.spawn(rofi_drun) end,
+              {description = "launch rofi drun menu", group = "launcher"}),
+    -- Rofi Calc
+    awful.key({ modkey, alt }, "c", function() awful.spawn(rofi_calc) end,
+              {description = "launch rofi-calc script", group = "launcher"}),
+    -- Rofi Power
+    awful.key({ modkey, alt }, "p", function() awful.spawn(rofi_power) end,
+              {description = "launch rofi-power script", group = "launcher"}),
     -- Firefox
     awful.key({ modkey }, "w", function() awful.spawn(browser) end,
               {description = "launch firefox-esr", group = "Web"}),
