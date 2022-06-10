@@ -40,8 +40,6 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/org/")
-
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -75,11 +73,25 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(use-package! ob-ein
-  :ensure t)
+;; Org Mode
+(after! org
+  (setq org-directory "~Documents/Org"
+        org-agenda-files "Documents/Org/agenda.org"
+        org-default-notes-file (expand-file-name "notes.org" org-directory)))
 
+;; Org Babel
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (python . t)
-   (ein . t)))
+   (python . t)))
+
+;; Org Roam v2
+(after! org-roam
+   (setq org-roam-directory "~/Documents/Org/RoamNotes"))
+
+;; Org Journal
+(setq org-journal-dir "~/Documents/Org/Journal"
+      org-journal-date-prefix "* "
+      org-journal-time-prefix "** "
+      org-journal-date-format "%B %d, %Y (%A)"
+      org-journal-file-format "%Y-%m-%d.org")
