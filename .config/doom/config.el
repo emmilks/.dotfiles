@@ -75,9 +75,10 @@
 
 ;; Org Mode
 (after! org
-  (setq org-directory "~Documents/Org"
-        org-agenda-files "Documents/Org/agenda.org"
-        org-default-notes-file (expand-file-name "notes.org" org-directory)))
+  (setq org-directory "~/Documents/Org/"
+        org-agenda-files "~/Documents/Org/agenda.org"
+        org-default-notes-file (expand-file-name "notes.org" org-directory)
+        org-id-locations-file "~/Documents/Org/.org-id-locations"))
 
 ;; Org Babel
 (org-babel-do-load-languages
@@ -87,10 +88,11 @@
 
 ;; Org Roam v2
 (after! org-roam
-   (setq org-roam-directory "~/Documents/Org/RoamNotes"))
+  (setq org-roam-directory "~/Documents/Org/RoamNotes/"))
+(org-roam-db-autosync-mode)
 
 ;; Org Journal
-(setq org-journal-dir "~/Documents/Org/Journal"
+(setq org-journal-dir "~/Documents/Org/Journal/"
       org-journal-date-prefix "* "
       org-journal-time-prefix "** "
       org-journal-date-format "%B %d, %Y (%A)"
