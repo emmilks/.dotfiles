@@ -73,6 +73,10 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Shells
+;; Set default shell to bash for shell, term, ansi-term, vterm
+(setq shell-file-name "/bin/bash")
+
 ;; Org Mode
 (after! org
   (setq org-directory "~/Documents/Org/"
