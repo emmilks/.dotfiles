@@ -101,3 +101,5 @@
       org-journal-time-prefix "** "
       org-journal-date-format "%B %d, %Y (%A)"
       org-journal-file-format "%Y-%m-%d.org")
+
+(setq browse-url-browser-function 'eww-browse-url)
