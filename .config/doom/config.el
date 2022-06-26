@@ -80,9 +80,11 @@
 ;; Org Mode
 (after! org
   (setq org-directory "~/Documents/Org/"
-        org-agenda-files "~/Documents/Org/agenda.org"
+        org-agenda-files '("~/Documents/Org/agenda.org")
         org-default-notes-file (expand-file-name "notes.org" org-directory)
-        org-id-locations-file "~/Documents/Org/.org-id-locations"))
+        org-id-locations-file "~/Documents/Org/.org-id-locations"
+        org-startup-folded t))
+
 
 ;; Org Babel
 (org-babel-do-load-languages
