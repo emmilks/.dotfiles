@@ -96,7 +96,21 @@
 
 ;; Org Roam v2
 (after! org-roam
-  (setq org-roam-directory "~/Documents/Org/RoamNotes/"))
+  (setq org-roam-directory "~/Documents/Org/RoamNotes/"
+        org-roam-capture-templates
+        '(("d" "default" plain
+           "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+roam_ref: \n#+filetags: %^g\n#+setupfile: ../latex-header.org \n#+date:%t\n\n")
+           :unnarrowed t)
+        ("l" "programming language" plain
+           "* Characteristics\n\n- Family: %?\n Inspired by: \n\n* Reference:\n\n"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+roam_ref: \n#+filetags: %^g\n#+setupfile: ../latex-header.org \n#+date:%t\n\n")
+           :unnarrowed t)
+        ("b" "book notes" plain
+           "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+roam_ref: \n#+filetags: %^g\n#+setupfile: ../latex-header.org \n#+date:%t\n\n")
+           :unnarrowed t))))
+
 (org-roam-db-autosync-mode)
 
 ;; Org Journal
@@ -107,4 +121,3 @@
       org-journal-file-format "%Y-%m-%d.org")
 
 (setq browse-url-browser-function 'eww-browse-url)
-
