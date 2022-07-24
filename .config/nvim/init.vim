@@ -9,7 +9,6 @@ Plug 'morhetz/gruvbox'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'junegunn/goyo.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 
