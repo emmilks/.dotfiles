@@ -3,3 +3,5 @@
 # Please adapt and uncomment the following lines:
 	name = emmilks
 	email = emmilks@yahoo.com
+[init]
+	defaultBranch = main
