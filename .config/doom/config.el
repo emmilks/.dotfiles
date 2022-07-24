@@ -83,6 +83,7 @@
         org-agenda-files '("~/Documents/Org/agenda.org")
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-id-locations-file "~/Documents/Org/.org-id-locations"
+        org-fold-core-style 'overlays
         org-startup-with-inline-images t
         org-startup-with-latex-preview t
         org-startup-folded t))
@@ -121,3 +122,6 @@
       org-journal-file-format "%Y-%m-%d.org")
 
 (setq browse-url-browser-function 'eww-browse-url)
+
+;; Elfeed
+(setq elfeed-goodies/entry-pane-size 0.7)
