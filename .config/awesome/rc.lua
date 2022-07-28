@@ -544,6 +544,9 @@ client.connect_signal("manage", function (c)
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
 
+    -- prevent  awesomewm from using hints to define the size of windows
+    c.size_hints_honor = false
+
     if awesome.startup
       and not c.size_hints.user_position
       and not c.size_hints.program_position then
