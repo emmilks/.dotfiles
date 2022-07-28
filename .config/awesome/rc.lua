@@ -51,6 +51,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(string.format("%s/.dotfiles/.config/awesome/themes/powerarrow-dark/theme.lua", os.getenv("HOME")))
 
+beautiful.useless_gap = 2
 -- Variables for common programs I use
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "editor"

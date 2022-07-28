@@ -15,8 +15,8 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
-theme.dir                                       = os.getenv("HOME") .. "/.dotfiles/.config/awesome/themes/powerarrow-dark"
-theme.wallpaper                                 = theme.dir .. "/wall.png"
+theme.dir                                       = os.getenv("HOME") .. "/Storage/Pictures/Wallpapers"
+theme.wallpaper                                 = theme.dir .. "/cyberpunk.jpg"
 theme.font                                      = "Fira Code 11"
 
 theme.fg_normal                                 = "#ebdbb2"
