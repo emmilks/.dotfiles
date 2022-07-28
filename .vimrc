@@ -2,14 +2,14 @@ let mapleader=" "
 
 set clipboard=unnamedplus
 
-"call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged')
 
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "#Plug 'vimwiki/vimwiki'
-"Plug 'dhruvasagar/vim-table-mode'
-"Plug 'junegunn/goyo.vim'
-"Plug 'itchyny/lightline.vim'
-"call plug#end()
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'junegunn/goyo.vim'
+Plug 'itchyny/lightline.vim'
+call plug#end()
 
 
 autocmd BufRead,BufNewFile *.tex set filetype=tex
@@ -78,6 +78,6 @@ set splitbelow splitright
 vnoremap <C-c> "+y
 map <C-p> "+P
 let g:gruvbox_guisp_fallback="bg"
-"autocmd vimenter * ++nested colorscheme gruvbox
+autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
 "let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
