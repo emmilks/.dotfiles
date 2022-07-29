@@ -13,10 +13,11 @@ local dpi   = require("beautiful.xresources").apply_dpi
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
+local wallpapers = os.getenv("HOME") .. "/Storage/Pictures/Wallpapers"
 
 local theme                                     = {}
-theme.dir                                       = os.getenv("HOME") .. "/Storage/Pictures/Wallpapers"
-theme.wallpaper                                 = theme.dir .. "/cyberpunk.jpg"
+theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-dark"
+theme.wallpaper                                 = wallpapers .. "/cyberpunk.jpg"
 theme.font                                      = "Fira Code 11"
 
 theme.fg_normal                                 = "#ebdbb2"
