@@ -14,7 +14,7 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 -- PC
-local wallpapers = os.getenv("HOME") .. "/Storage/Pictures/Wallpapers"
+--local wallpapers = os.getenv("HOME") .. "/Storage/Pictures/Wallpapers"
 -- Laptop
 local wallpapers = os.getenv("HOME") .. "/Pictures/Wallpapers"
 
