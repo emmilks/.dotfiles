@@ -11,6 +11,12 @@ Plug 'junegunn/goyo.vim'
 Plug 'itchyny/lightline.vim'
 call plug#end()
 
+" Vim lightline plugin
+set laststatus=2
+if !has('gui_running')
+    set t_Co=256
+endif
+
 
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
