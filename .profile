@@ -29,6 +29,7 @@ fi
 # Default Apps
 export EDITOR="nvim"
 export TERMINAL="urxvt"
+export TERM="xterm-256color"
 export BROWSER="firefox-esr"
 export READER="zathura"
 export VISUAL="nvim"
