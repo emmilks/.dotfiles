@@ -2,8 +2,13 @@ let mapleader=" "
 
 set clipboard=unnamedplus
 
-call plug#begin('~/.vim/plugged')
+if filereadable(expand("~/.vim/autoload/plug.vim")) endif
 
+call plug#begin('~/.vim/plugged')
+Plug 'sheerun/vim-polyglot'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'morhetz/gruvbox'
 "#Plug 'vimwiki/vimwiki'
 Plug 'dhruvasagar/vim-table-mode'
