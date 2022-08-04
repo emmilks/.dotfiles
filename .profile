@@ -27,7 +27,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Default Apps
-export EDITOR="nvim"
+export EDITOR="vim"
 export TERMINAL="urxvt"
 export TERM="xterm-256color"
 export BROWSER="firefox-esr"
@@ -43,4 +43,7 @@ export PAGER="less"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
+
+# Go
+export GOPATH="$(go env GOPATH)"
