@@ -2,7 +2,8 @@ let mapleader=" "
 
 set clipboard=unnamedplus
 
-if filereadable(expand("~/.vim/autoload/plug.vim")) endif
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
