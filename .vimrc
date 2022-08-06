@@ -1,6 +1,9 @@
+set nocompatible
 let mapleader=" "
+set number relativenumber
+syntax on
+filetype plugin on
 
-set clipboard=unnamedplus
 
 if filereadable(expand("~/.vim/autoload/plug.vim"))
 endif
@@ -9,7 +12,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'rwxrob/vim-pandoc-syntax-simple'
+"Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'morhetz/gruvbox'
 "#Plug 'vimwiki/vimwiki'
 Plug 'dhruvasagar/vim-table-mode'
@@ -32,6 +36,7 @@ map <leader>G :w! \| !comp <c-r>%<CR><CR>
 map <leader>o :!opout <c-r>%<CR><CR>
 
 "Enable and disable auto comment
+
 map <leader>c :setlocal formatoptions-=cro<CR>
 map <leader>C :setlocal formatoptions=cro<CR>
 
@@ -55,12 +60,8 @@ nnoremap <leader>h :split<Space>
 nnoremap <leader>v :vsplit<Space>
 
 "Alias replace all to S
-nnoremap S :%s//gI<Left><Left><Left>
+"nnoremap S :%s//gI<Left><Left><Left>
 
-set number relativenumber
-syntax on
-set nocompatible
-filetype plugin on
 set background=dark
 set hidden
 set hlsearch
@@ -87,8 +88,6 @@ set wildmode=longest,list,full
 "Fix splitting
 set splitbelow splitright
 
-vnoremap <C-c> "+y
-map <C-p> "+P
 let g:gruvbox_guisp_fallback="bg"
 autocmd vimenter * ++nested colorscheme gruvbox
 set background=dark
