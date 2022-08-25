@@ -142,3 +142,17 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+[ -f "/home/eric/.ghcup/env" ] && source "/home/eric/.ghcup/env" # ghcup-env
+
+recent() {
+    find $HOME/Storage/ $HOME/Documents -type f -regex ".*\.\(md\|org\)" 2>/dev/null -mtime -$1
+}
+
+fold_conv() {
+    find ./ -iname "$0" -type f -exec sh -c 'pandoc "${0}" -o "${0%.$1}.$2"' {} \;
+}
+
+fold_sed() {
+    find . -type f -name '*.md' -exec sed -i 's/(id.*)//g' {} \;
+}
