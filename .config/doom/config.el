@@ -89,12 +89,6 @@
         org-startup-folded t))
 
 
-;; Org Babel
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (python . t)))
-
 ;; Org Roam v2
 (after! org-roam
   (setq org-roam-directory "~/Documents/Org/RoamNotes/"
