@@ -20,6 +20,5 @@ nm-applet &
 volumeicon &
 xrdb  ~/.Xresources
 xmodmap ~/.Xmodmap
-emacs --daemon &
-xrandr --mode 1920x1080 --rate 60
+xrandr --mode 2560x1440 --rate 144
 exec awesome
