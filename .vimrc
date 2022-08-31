@@ -12,13 +12,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-pandoc/vim-pandoc'
-Plug 'rwxrob/vim-pandoc-syntax-simple'
-"Plug 'vim-pandoc/vim-pandoc-syntax'
+"Plug 'rwxrob/vim-pandoc-syntax-simple'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'morhetz/gruvbox'
 "#Plug 'vimwiki/vimwiki'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'junegunn/goyo.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " Vim lightline plugin
@@ -59,9 +61,25 @@ map <C-l> <C-w>l
 nnoremap <leader>h :split<Space>
 nnoremap <leader>v :vsplit<Space>
 
-"Alias replace all to S
-"nnoremap S :%s//gI<Left><Left><Left>
+" FZF
+" b = buffers
+nnoremap 'b  :Buffers<cr>
+" c = config
+nnoremap 'c  :Files ~/.config/<cr>
+" d = documents
+nnoremap 'd  :Files ~/Documents/<cr>
+" f = fzf
+nnoremap 'f  :Files<cr>
+" h = home
+nnoremap 'h  :Files ~/<cr>
+" n = notes
+nnoremap 'n  :Files $NOTES_DIR/<cr>
+" t = tags
+nnoremap 't  :Tags<cr>
+" p = pwd
+nnoremap <leader>p :Files %:p:h<CR>
 
+" Vim Options
 set background=dark
 set hidden
 set hlsearch
