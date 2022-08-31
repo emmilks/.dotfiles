@@ -11,6 +11,7 @@ esac
 source .bash_aliases
 
 export PATH="$GOPATH/bin:/home/eric/.local/bin:/home/eric/.emacs.d/bin":$PATH
+export NOTES_DIR="$HOME/Storage/Notes/"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -147,10 +148,6 @@ ex ()
 
 recent() {
     find $HOME/Storage/ $HOME/Documents -type f -regex ".*\.\(md\|org\)" 2>/dev/null -mtime -$1
-}
-
-fold_conv() {
-    find ./ -iname "$0" -type f -exec sh -c 'pandoc "${0}" -o "${0%.$1}.$2"' {} \;
 }
 
 fold_sed() {
