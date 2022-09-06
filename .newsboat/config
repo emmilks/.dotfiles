@@ -1,0 +1,46 @@
+# general
+auto-reload yes
+reload-time 120
+show-read-articles no
+show-read-feeds no
+delete-read-articles-on-quit yes
+text-width 80
+reload-threads 8
+show-title-bar yes
+confirm-exit no
+cleanup-on-quit no
+
+# define
+browser "firefox-esr %u"
+external-url-viewer "urlscan"
+#html-renderer "lynx"
+player "mpv"
+download-retries 4
+pager internal
+article-sort-order date-asc
+datetime-format "%Y-%m-%d"
+save-path ~/Downloads/
+
+# Keys
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key a toggle-article-read
+bind-key n next-unread
+bind-key N prev-unread
+bind-key D pb-download
+bind-key U show-urls
+bind-key x pb-delete
+bind-key r reload
+bind-key R reload-all
+
+macro v set browser "setsid -f mpv" ; open-in-browser
