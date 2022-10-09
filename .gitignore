@@ -1,0 +1,3 @@
+.config/emacs/**/
+.config/emacs/*.eld
+.config/emacs/recentf
