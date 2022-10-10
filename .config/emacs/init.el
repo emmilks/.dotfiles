@@ -155,7 +155,12 @@
     helm-echo-input-in-header-line t)
   (helm-autoresize-mode 1)
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ;rebind tab to run persistent action
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)) ; make TAB work in terminal
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)); make TAB work in terminal
+
+(require 'helm-config)
+(helm-autoresize-mode 1)
+(define-key helm-find-files-map (kbd "C-b") 'helm-find-files-up-one-level)
+(define-key helm-find-files-map (kbd "C-f") 'helm-execute-persistent-action)
 
 (use-package helm-projectile
   :after projectile
@@ -212,16 +217,3 @@
   (prog-mode . company-mode))
 
 (setq gc-cons-threshold (* 2 1000 1000))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company dashboard ess doom-modeline all-the-icons doom-themes helm-projectile helm popup ivy which-key rainbow-delimiters rainbow-mode diminish org-auto-tangle no-littering use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
