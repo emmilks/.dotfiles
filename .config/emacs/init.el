@@ -1,5 +1,3 @@
-(setq gc-cons-threshold (* 50 1000 1000))
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -13,6 +11,18 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 (straight-use-package 'use-package)
+
+(use-package diminish
+  :straight t)
+
+(use-package gcmh
+  :straight t
+  :diminish gcmh-mode
+  :custom
+  (gcmh-mode 1)
+  (gcmh-idle-delay 5)
+  (gcmh-high-cons-threshold (* 256 1024 1024))
+  (gc-cons-percentage 0.2))
 
 ;; Prevent main screen from appearing at startup
 (setq inhibit-startup-message t)
@@ -34,10 +44,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 ;; Disable bell
 (setq ring-bell-function 'ignore)
-;; Disable unneeded UI elements
-;;(menu-bar-mode -1) Uncomment when you are comfortable with emacs
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
 
 ;; Cleanup whitespace
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -138,9 +144,9 @@
 (defvar em/default-font-size 115)
 (defvar em/default-variable-font-size 115)
 
-;(set-face-attribute 'default nil :font "Fira Code Retina" :height em/default-font-size)
-;(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height em/default-font-size)
-;(set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
+(set-face-attribute 'default nil :font "Fira Code" :height em/default-font-size :weight 'regular)
+(set-face-attribute 'fixed-pitch nil :font "Fira Code" :height em/default-font-size :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
 
 (use-package doom-themes
     :straight t
@@ -215,5 +221,3 @@
   (setq company-minimum-prefix-length 2)
   :hook
   (prog-mode . company-mode))
-
-(setq gc-cons-threshold (* 2 1000 1000))

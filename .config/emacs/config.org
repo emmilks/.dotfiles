@@ -2,12 +2,6 @@
 #+PROPERTY:  header-args:emacs-lisp :tangle ./init.el
 #+auto_tangle: t
 
-* Garbage Collection
-Improve emacs startup performance.
-#+begin_src emacs-lisp
-    (setq gc-cons-threshold (* 50 1000 1000))
-#+end_src
-
 * Package Management
 Install =use-package= and set package repositories
 #+begin_src emacs-lisp
@@ -24,6 +18,30 @@ Install =use-package= and set package repositories
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 (straight-use-package 'use-package)
+#+end_src
+* Diminish
+#+begin_src emacs-lisp
+  (use-package diminish
+    :straight t)
+#+end_src
+
+* Doom Garbage Collection
+Adopt a sneaky garbage collection strategy of waiting until idle
+time to collect; staving off the collector while the user is
+working.  Thanks Doom -
+https://github.com/hlissner/doom-emacs/blob/develop/docs/faq.org#how-does-doom-start-up-so-quickly
+
+#+begin_src emacs-lisp
+(use-package gcmh
+  :straight t
+  :diminish gcmh-mode
+  :custom
+  (gcmh-mode 1)
+  (gcmh-idle-delay 5)
+  (gcmh-high-cons-threshold (* 256 1024 1024))
+  (gc-cons-percentage 0.2))
+
+
 #+end_src
 
 * General Improvements
@@ -49,10 +67,6 @@ Make emacs suck less
   (defalias 'yes-or-no-p 'y-or-n-p)
   ;; Disable bell
   (setq ring-bell-function 'ignore)
-  ;; Disable unneeded UI elements
-  ;;(menu-bar-mode -1) Uncomment when you are comfortable with emacs
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
 
   ;; Cleanup whitespace
   (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -213,9 +227,9 @@ Requirement for helm
   (defvar em/default-font-size 115)
   (defvar em/default-variable-font-size 115)
 
-  ;(set-face-attribute 'default nil :font "Fira Code Retina" :height em/default-font-size)
-  ;(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height em/default-font-size)
-  ;(set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
+  (set-face-attribute 'default nil :font "Fira Code" :height em/default-font-size :weight 'regular)
+  (set-face-attribute 'fixed-pitch nil :font "Fira Code" :height em/default-font-size :weight 'regular)
+  (set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
 #+end_src
 
 * Theme
@@ -320,9 +334,5 @@ Persistent history over Emacs restarts. Vertico sorts by history position
     :hook
     (prog-mode . company-mode))
 #+end_src
-
-* Cleanup
-Set gc to reasonable threshold after startup.
-#+begin_src emacs-lisp
-(setq gc-cons-threshold (* 2 1000 1000))
-#+end_src
+* Development
+** Python
