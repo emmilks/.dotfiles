@@ -24,46 +24,52 @@
   (gcmh-high-cons-threshold (* 256 1024 1024))
   (gc-cons-percentage 0.2))
 
-;; Prevent main screen from appearing at startup
-(setq inhibit-startup-message t)
-;; Name and email
-(setq user-full-name "Eric Milks"
-    user-mail-address "emmilks@yahoo.com")
+(defvar em/default-font-size 115)
+(defvar em/default-variable-font-size 115)
 
-;; Line Numbers
-(column-number-mode)
-(global-display-line-numbers-mode t)
+(use-package emacs
+  :after doom-themes
+  :init
+  (set-face-attribute 'default nil :font "Fira Code" :height em/default-font-size :weight 'regular)
+  (set-face-attribute 'fixed-pitch nil :font "Fira Code" :height em/default-font-size :weight 'regular)
+  (set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
+  :config
+  ;; Prevent main screen from appearing at startup
+  (setq inhibit-startup-message t)
+  ;; Line Numbers
+  (column-number-mode)
+  (global-display-line-numbers-mode t)
 
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-        term-mode-hook
+  ;; Disable line numbers for some modes
+  (dolist (mode '(term-mode-hook
         shell-mode-hook
         eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0 ))))
-;; Change yes-or-no to y-or-n
-(defalias 'yes-or-no-p 'y-or-n-p)
-;; Disable bell
-(setq ring-bell-function 'ignore)
-
-;; Cleanup whitespace
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
+  (setq use-short-answers t)
+  (show-paren-mode t)
+  ;; Disable bell
+  (setq ring-bell-function 'ignore)
+  (setq auto-save-file-name-transforms
+    `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  ;; Text Encode
+  (prefer-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (global-auto-revert-mode t)    ;; Auto Revert Buffer
+  (setq-default tab-width 4    ;; Tab behavior
+    indent-tabs-mode nil)
+  (delete-selection-mode t)    ;; Start writing after deletion
+  (setq-default fill-column 80)
+  (setq-default frame-title-format '("%b")) ; make window title the buffer name
+  ;; Increase the amount of data Emacs reads from the process
+  (setq read-process-output-max (* 1024 1024))
+  :hook
+  (before-save-hook . whitespace-cleanup))
 
 (setq user-emacs-directory "~/.config/emacs/")
 (use-package no-littering
   :straight t)
-
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-
-(global-auto-revert-mode t)
-
-(setq-default tab-width 4
-      indent-tabs-mode nil)
 
 (defun config-visit ()
   (interactive)
@@ -140,13 +146,6 @@
   :straight t
   :config
   (dired-async-mode 1))
-
-(defvar em/default-font-size 115)
-(defvar em/default-variable-font-size 115)
-
-(set-face-attribute 'default nil :font "Fira Code" :height em/default-font-size :weight 'regular)
-(set-face-attribute 'fixed-pitch nil :font "Fira Code" :height em/default-font-size :weight 'regular)
-(set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
 
 (use-package doom-themes
     :straight t
