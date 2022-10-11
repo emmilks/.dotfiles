@@ -1,18 +1,18 @@
 (setq gc-cons-threshold (* 50 1000 1000))
 
-;; Use-Package Packages
-(setq package-archives
-  '(("melpa" . "https://melpa.org/packages/")
-    ("elpa" . "https://elpa.gnu.org/packages/")
-    ("org"   . "https://orgmode.org/elpa/")))
-
-;;; BOOTSTRAP USE-PACKAGE
-(package-initialize)
-(setq use-package-always-ensure t)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile (require 'use-package))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
 
 ;; Prevent main screen from appearing at startup
 (setq inhibit-startup-message t)
@@ -48,7 +48,8 @@
 (set-keyboard-coding-system 'utf-8)
 
 (setq user-emacs-directory "~/.config/emacs/")
-(use-package no-littering)
+(use-package no-littering
+  :straight t)
 
 (setq auto-save-file-name-transforms
       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
@@ -99,18 +100,23 @@
 (setq org-confirm-babel-evaluate nil)
 
 (use-package org-auto-tangle
+  :straight t
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
-(use-package diminish)
+(use-package diminish
+    :straight t)
 
 (use-package rainbow-mode
+  :straight t
   :hook (prog-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
+  :straight t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package which-key
+  :straight t
   :defer 0
   :diminish which-key-mode
   :config
@@ -124,58 +130,21 @@
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "C-x b") 'ibuffer)
 
-(use-package ivy)
-
 (use-package async
+  :straight t
   :config
   (dired-async-mode 1))
-
-(use-package popup)
-
-(use-package helm
-  :init
-  (helm-mode 1)
-  :bind
-  ("M-x" . 'helm-M-x)
-  ("C-x C-f" . 'helm-find-files)
-  ("C-x C-b" . 'helm-buffers-list)
-  :config
-  ;;(require 'helm-config)
-  (setq helm-autoresize-max-height 0
-    helm-autoresize-min-height 40
-    helm-M-x-fuzzy-match t
-    helm-buffers-fuzzy-matching t
-    helm-recentf-fuzzy-match t
-    helm-semantic-fuzzy-match t
-    helm-imenu-fuzzy-match t
-    helm-split-window-in-side-p nil
-    helm-move-to-line-cycle-in-source nil
-    helm-ff-search-library-in-sexp t
-    helm-scroll-amount 8
-    helm-echo-input-in-header-line t)
-  (helm-autoresize-mode 1)
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ;rebind tab to run persistent action
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)); make TAB work in terminal
-
-(require 'helm-config)
-(helm-autoresize-mode 1)
-(define-key helm-find-files-map (kbd "C-b") 'helm-find-files-up-one-level)
-(define-key helm-find-files-map (kbd "C-f") 'helm-execute-persistent-action)
-
-(use-package helm-projectile
-  :after projectile
-  :config
-  (helm-projectile-on))
 
 (defvar em/default-font-size 115)
 (defvar em/default-variable-font-size 115)
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height em/default-font-size)
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height em/default-font-size)
-(set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
+;(set-face-attribute 'default nil :font "Fira Code Retina" :height em/default-font-size)
+;(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height em/default-font-size)
+;(set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
 
 (use-package doom-themes
-  :config
+    :straight t
+    :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -189,14 +158,18 @@
   (doom-themes-org-config))
 
 (use-package all-the-icons
-  :if (display-graphic-p))
+    :straight t
+    :if (display-graphic-p))
 
 (use-package doom-modeline
+  :straight t
   :init (doom-modeline-mode 1))
 
-(use-package ess)
+(use-package ess
+    :straight t)
 
 (use-package projectile
+  :straight t
   :init
   (projectile-mode 1)
   :config
@@ -204,12 +177,39 @@
   (global-set-key (kbd "<f5>") 'projectile-compile-project))
 
 (use-package dashboard
+  :straight t
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents . 5)
               (projects . 5))))
 
+(use-package vertico
+  :straight t
+  :init
+  (vertico-mode))
+
+(use-package savehist
+  :straight t
+  :init
+  (savehist-mode))
+
+(use-package orderless
+  :straight t
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+(use-package marginalia
+  :after vertico
+  :straight t
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :init
+  (marginalia-mode))
+
 (use-package company
+  :straight t
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)

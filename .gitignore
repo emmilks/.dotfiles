@@ -10,3 +10,4 @@
 .config/emacs/transient/
 .config/emacs/tutorial/
 .config/emacs/var/
+.config/emacs/straight

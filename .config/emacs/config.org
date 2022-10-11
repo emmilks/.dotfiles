@@ -71,7 +71,7 @@ Set UTF-8 encoding everywhere
 #+begin_src emacs-lisp
   (setq user-emacs-directory "~/.config/emacs/")
   (use-package no-littering
-	:straight t)
+    :straight t)
 
   (setq auto-save-file-name-transforms
         `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
@@ -213,9 +213,9 @@ Requirement for helm
   (defvar em/default-font-size 115)
   (defvar em/default-variable-font-size 115)
 
-  (set-face-attribute 'default nil :font "Fira Code Retina" :height em/default-font-size)
-  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height em/default-font-size)
-  (set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
+  ;(set-face-attribute 'default nil :font "Fira Code Retina" :height em/default-font-size)
+  ;(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height em/default-font-size)
+  ;(set-face-attribute 'variable-pitch nil :font "Liberation Serif" :height em/default-variable-font-size :weight 'regular)
 #+end_src
 
 * Theme
@@ -262,10 +262,10 @@ Project management
   (global-set-key (kbd "<f5>") 'projectile-compile-project))
 #+end_src
 
-* Dashboard
+n* Dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
-  :straight t  
+  :straight t
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents . 5)
@@ -273,6 +273,44 @@ Project management
 #+end_src
 
 * Completion
+** Vertico
+Minimal completion engine.
+#+begin_src emacs-lisp
+  (use-package vertico
+    :straight t
+    :init
+    (vertico-mode))
+#+end_src
+
+** Savehist
+Persistent history over Emacs restarts. Vertico sorts by history position
+#+begin_src emacs-lisp
+  (use-package savehist
+    :straight t
+    :init
+    (savehist-mode))
+#+end_src
+
+** Orderless
+#+begin_src emacs-lisp
+  (use-package orderless
+    :straight t
+    :init
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
+** Marginalia
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :after vertico
+    :straight t
+    :custom
+    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+    :init
+    (marginalia-mode))
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package company
     :straight t
