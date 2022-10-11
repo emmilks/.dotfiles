@@ -116,9 +116,6 @@
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
-(use-package diminish
-    :straight t)
-
 (use-package rainbow-mode
   :straight t
   :hook (prog-mode . rainbow-mode))
@@ -216,7 +213,6 @@
 (use-package company
   :straight t
   :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 2)
-  :hook
-  (prog-mode . company-mode))
+  (setq company-idle-delay 0.3)
+  (setq company-minimum-prefix-length 3)
+  (global-company-mode))

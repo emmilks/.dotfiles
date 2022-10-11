@@ -163,13 +163,6 @@ Always select the bash shell when launching a terminal. Set keybind for =ansi-te
   :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 
-* Diminish
-Lets you hide minor modes from showing in the mode line
-#+begin_src emacs-lisp
-(use-package diminish
-    :straight t)
-#+end_src
-
 * Rainbow
 Highlight css color in the buffer
 #+begin_src emacs-lisp
@@ -208,7 +201,6 @@ Always kill current buffer. Let ibuffer handle the fancy stuff
 #+end_src
 
 ** Async
-Requirement for helm
 #+begin_src emacs-lisp
     (use-package async
       :straight t
@@ -260,7 +252,7 @@ Project management
   (global-set-key (kbd "<f5>") 'projectile-compile-project))
 #+end_src
 
-n* Dashboard
+* Dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
   :straight t
@@ -313,10 +305,9 @@ Persistent history over Emacs restarts. Vertico sorts by history position
   (use-package company
     :straight t
     :config
-    (setq company-idle-delay 0)
-    (setq company-minimum-prefix-length 2)
-    :hook
-    (prog-mode . company-mode))
+    (setq company-idle-delay 0.3)
+    (setq company-minimum-prefix-length 3)
+    (global-company-mode))
 #+end_src
 * Development
 ** Python
