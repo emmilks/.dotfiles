@@ -238,7 +238,7 @@ Always kill current buffer. Let ibuffer handle the fancy stuff
   (interactive)
   (kill-buffer (current-buffer)))
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
-(global-set-key (kbd "C-x b") 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 #+end_src
 
 ** Async
@@ -251,34 +251,40 @@ Always kill current buffer. Let ibuffer handle the fancy stuff
 
 * Theme
 #+begin_src emacs-lisp
-(use-package doom-themes
-    :straight t
-    :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one t)
+  ;; (use-package doom-themes
+  ;;     :straight t
+  ;;     :config
+  ;;   ;; Global settings (defaults)
+  ;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+  ;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;;   (load-theme 'doom-one t)
 
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;;(doom-themes-neotree-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
+  ;;   ;; Enable flashing mode-line on errors
+  ;;   (doom-themes-visual-bell-config)
+  ;;   ;; Enable custom neotree theme (all-the-icons must be installed!)
+  ;;   ;;(doom-themes-neotree-config)
+  ;;   ;; Corrects (and improves) org-mode's native fontification.
+  ;;   (doom-themes-org-config))
+  (use-package modus-themes
+	:straight t
+	:config
+	(load-theme 'modus-vivendi t))
 
-(use-package all-the-icons
-    :straight t
-    :if (display-graphic-p))
+  (use-package all-the-icons
+	  :straight t
+	  :if (display-graphic-p))
 
-(use-package doom-modeline
-  :straight t
-  :init (doom-modeline-mode 1))
+  (use-package doom-modeline
+	:straight t
+	:init (doom-modeline-mode 1))
 #+end_src
 
 * Statistics/R
 #+begin_src emacs-lisp
-(use-package ess
-    :straight t)
+  (use-package ess
+      :straight t
+      :config
+      (setq ess-indent-with-fancy-comments nil))
 #+end_src
 
 * Projectile
