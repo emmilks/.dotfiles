@@ -10,7 +10,7 @@ esac
 
 source .bash_aliases
 
-export PATH="$GOPATH/bin:/home/eric/.local/bin:/home/eric/.emacs.d/bin":$PATH
+export PATH="$HOME/.local/bin/":$PATH
 export NOTES_DIR="$HOME/Storage/Notes/"
 
 # don't put duplicate lines or lines starting with space in the history.
