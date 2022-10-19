@@ -151,6 +151,29 @@ Always select the bash shell when launching a terminal. Set keybind for =ansi-te
 (global-set-key (kbd "<s-return>") 'ansi-term)
 #+end_src
 
+* Dired
+  #+begin_src emacs-lisp
+    (use-package dired
+      :custom
+      (dired-auto-revert-buffer t)
+      (dired-dwim-target t)
+      (dired-hide-details-hide-symlink-targets nil)
+      (dired-listing-switches "-Aghov --group-directories-first")
+      (dired-kill-when-opening-new-dired-buffer t)
+      (dired-recursive-copies 'always)
+      :hook
+      (dired-mode . auto-revert-mode)
+      (dired-mode . dired-hide-details-mode))
+  
+  #+end_src
+* Dot-Mode
+Bring back . command from Vim.
+  #+begin_src emacs-lisp
+	(use-package dot-mode
+	  :straight t
+	  :config
+	  (global-dot-mode t))
+  #+end_src
 * Org
 ** Structure Templates
 #+begin_src emacs-lisp
