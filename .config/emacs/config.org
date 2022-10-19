@@ -197,14 +197,15 @@ Bring back . command from Vim.
 
 ** Org Auto Tangle
 #+begin_src emacs-lisp
-(use-package org-auto-tangle
-  :straight t
-  :defer t
-  :hook (org-mode . org-auto-tangle-mode))
+;(use-package org-auto-tangle
+;  :straight t
+;  :defer t
+;  :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 
 * Rainbow
 Highlight css color in the buffer
+Hello
 #+begin_src emacs-lisp
   (use-package rainbow-mode
     :straight t
