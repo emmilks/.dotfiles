@@ -63,16 +63,20 @@ Make emacs suck less
     :config
     ;; Prevent main screen from appearing at startup
     (setq inhibit-startup-message t)
+    (global-hl-line-mode)
     ;; Line Numbers
     (column-number-mode)
     (global-display-line-numbers-mode t)
 
     ;; Disable line numbers for some modes
-    (dolist (mode '(term-mode-hook
+    (dolist (mode '(org-mode-hook
+          term-mode-hook
+          info-mode-hook
+          text-mode-hook
           shell-mode-hook
           eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0 ))))
-    (setq use-short-answers t)
+    (defalias 'yes-or-no-p 'y-or-n-p)
     (show-paren-mode t)
     ;; Disable bell
     (setq ring-bell-function 'ignore)
