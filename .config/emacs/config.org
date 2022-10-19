@@ -469,14 +469,105 @@ Persistent history over Emacs restarts. Vertico sorts by history position
     :init
     (marginalia-mode))
 #+end_src
-
+** Corfu
+Completion engine that stays true to Emacs.
 #+begin_src emacs-lisp
-  (use-package company
+  ;; Auto completion example
+  (use-package corfu
     :straight t
-    :config
-    (setq company-idle-delay 0.3)
-    (setq company-minimum-prefix-length 3)
-    (global-company-mode))
+    :custom
+    (corfu-auto t)          ;; Enable auto completion
+    ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
+    (corfu-cycle t)             ;; Enable cycling for `corfu-next/previous'
+    (corfu-preselect-first nil) ;; Disable candidate preselection
+    (corfu-auto-prefix 2)
+    (corfu-auto-delay 0.2)
+    (corfu-quit-at-boundary 'separator)
+    (corfu-preview-current 'insert)
+    :bind (:map corfu-map
+		("M-SPC" . corfu-insert-separator)
+		("TAB"     . corfu-next)
+		([tab]     . corfu-next)
+		("S-TAB"   . corfu-previous)
+		([backtab] . corfu-previous)
+		("S-<return>" . corfu-insert)
+		("RET"     . nil) ;; leave my enter alone!
+		)
+    ;; Another key binding can be used, such as S-SPC.
+    ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
+    :init
+    (global-corfu-mode))
 #+end_src
 * Development
+** Magit
+   #+begin_src emacs-lisp
+     (use-package magit
+       :straight t
+       :defer t
+       :bind ("C-x g" . magit-status)
+       :commands (magit-status magit-get-current-branch)
+       :custom
+       (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+   #+end_src
+** Flycheck
+   #+begin_src emacs-lisp
+     (use-package flycheck
+       :straight t
+       :init (global-flycheck-mode))
+   #+end_src
 ** Python
+*** Python Mode
+   #+begin_src emacs-lisp
+	 (use-package python
+	   :config
+	   ;; Remove guess indent python message
+	   (setq python-indent-guess-indent-offset-verbose nil))
+   #+end_src
+*** Blacken
+	#+begin_src emacs-lisp
+	  (use-package blacken
+		:straight t
+		:defer t
+		:hook (python-mode-hook . blacken-mode))
+	#+end_src
+*** Highlight-Mode-Line
+    #+begin_src emacs-lisp
+      (use-package hide-mode-line
+	:straight t
+	:defer t
+	:hook ((inferior-python-mode-hook . hide-mode-line-mode)
+	       (inferior-ess-r-mode-hook . hide-mode-line-mode)))
+    #+end_src
+** LSP Mode
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :straight t
+    :defer t
+    :defines (lsp-keymap-prefix lsp-mode-map)
+    :init
+    (setq lsp-keymap-prefix "C-c l")
+    :custom
+    ;; Read the documentation for those variable with `C-h v'.
+    ;; This reduces the visual bloat that LSP sometimes generate.
+    (lsp-eldoc-enable-hover nil)
+    (lsp-signature-auto-activate nil)
+    (lsp-completion-enable t)
+    :hook ((lsp-mode . lsp-enable-which-key-integration))
+    :commands (lsp lsp-deferred))
+#+end_src
+*** LSP Pyright
+#+begin_src emacs-lisp
+  (use-package lsp-pyright
+    :straight t
+    :defer t
+    :custom
+    (lsp-pyright-disable-language-service nil)
+    (lsp-pyright-disable-organize-imports nil)
+    (lsp-pyright-auto-import-completions t)
+    (lsp-pyright-use-library-code-for-types t)
+    (lsp-completion-enable t)
+    ;; Launches pyright when a python buffer is opened.
+    :hook ((python-mode . (lambda ()
+			    (require 'lsp-pyright)
+			    (lsp-deferred)))))
+#+end_src
