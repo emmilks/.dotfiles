@@ -43,13 +43,19 @@ https://github.com/hlissner/doom-emacs/blob/develop/docs/faq.org#how-does-doom-s
 #+end_src
 
 * General Improvements
+** Keep Folders Clean
+#+begin_src emacs-lisp
+  (use-package no-littering
+    :straight t)
+#+end_src
+
+** Emacs
 Make emacs suck less
 #+begin_src emacs-lisp
   (defvar em/default-font-size 115)
   (defvar em/default-variable-font-size 115)
 
   (use-package emacs
-    :after doom-themes
     :init
     (set-face-attribute 'default nil :font "Fira Code" :height em/default-font-size :weight 'regular)
     (set-face-attribute 'fixed-pitch nil :font "Fira Code" :height em/default-font-size :weight 'regular)
@@ -78,24 +84,31 @@ Make emacs suck less
     (set-terminal-coding-system 'utf-8)
     (set-keyboard-coding-system 'utf-8)
     (global-auto-revert-mode t)    ;; Auto Revert Buffer
-    (setq-default tab-width 4    ;; Tab behavior
-      indent-tabs-mode nil)
+    (setq-default tab-width 4)    ;; Tab behavior
+    (setq-default indent-tabs-mode nil) ;; Spaces instead of tabs because I am not a heathen
     (delete-selection-mode t)    ;; Start writing after deletion
     (setq-default fill-column 80)
     (setq-default frame-title-format '("%b")) ; make window title the buffer name
     ;; Increase the amount of data Emacs reads from the process
     (setq read-process-output-max (* 1024 1024))
+    (setq user-emacs-directory "~/.config/emacs/")
+    (setq custom-file (concat user-emacs-directory "custom.el"))
     :hook
     (before-save-hook . whitespace-cleanup))
-
+    (load-file custom-file)
 #+end_src
 
-** Keep Folders Clean
-#+begin_src emacs-lisp
-  (setq user-emacs-directory "~/.config/emacs/")
-  (use-package no-littering
-    :straight t)
-#+end_src
+** Improved Kill Word
+Bring some Vim functionality to Emacs. Kill inner word.
+   #+begin_src emacs-lisp
+   (defun em/kill-inner-word ()
+  "Kills the entire word your cursor is in. Equivalent to 'ciw' in vim."
+  (interactive)
+  (forward-char 1)
+  (backward-word)
+  (kill-word 1))
+(global-set-key (kbd "C-c w k") 'em/kill-inner-word)
+   #+end_src
 
 ** Load Config
 #+begin_src emacs-lisp
