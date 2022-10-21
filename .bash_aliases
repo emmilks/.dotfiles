@@ -1,7 +1,6 @@
 alias grep="grep --color=auto"
-alias ls="ls --color=auto -lAh"
-alias ll="ls --color=auto -l"
 alias cd..="cd .."
 alias mv="mv -v"
 alias cp="cp -v"
 alias rm="rm -v"
+alias ls="ls -Aghov --group-directories-first --color=auto"
