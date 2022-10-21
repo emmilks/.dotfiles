@@ -141,10 +141,10 @@
 
 (setq org-confirm-babel-evaluate nil)
 
-;(use-package org-auto-tangle
-;  :straight t
-;  :defer t
-;  :hook (org-mode . org-auto-tangle-mode))
+;; (use-package org-auto-tangle
+;;  :straight t
+;;  :defer t
+;;  :hook (org-mode . org-auto-tangle-mode))
 
 (use-package rainbow-mode
   :straight t
@@ -194,8 +194,25 @@
   (load-theme 'modus-vivendi t))
 
 (use-package all-the-icons
-	:straight t
-	:if (display-graphic-p))
+    :straight t
+    :if (display-graphic-p))
+
+(use-package all-the-icons-completion
+  :straight t
+  :init
+  (all-the-icons-completion-mode)
+  :hook
+  (marginalia-mode . all-the-icons-completion-marginalia-setup))
+
+(use-package all-the-icons-dired
+  :straight t
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
+
+(use-package all-the-icons-ibuffer
+  :straight t
+  :hook
+  (ibuffer-mode . all-the-icons-ibuffer-mode))
 
 (use-package doom-modeline
   :straight t

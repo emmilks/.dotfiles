@@ -197,10 +197,10 @@ Bring back . command from Vim.
 
 ** Org Auto Tangle
 #+begin_src emacs-lisp
-;(use-package org-auto-tangle
-;  :straight t
-;  :defer t
-;  :hook (org-mode . org-auto-tangle-mode))
+  ;; (use-package org-auto-tangle
+  ;;  :straight t
+  ;;  :defer t
+  ;;  :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 
 * Rainbow
@@ -266,17 +266,34 @@ Always kill current buffer. Let ibuffer handle the fancy stuff
   ;;   ;; Corrects (and improves) org-mode's native fontification.
   ;;   (doom-themes-org-config))
   (use-package modus-themes
-	:straight t
-	:config
-	(load-theme 'modus-vivendi t))
+    :straight t
+    :config
+    (load-theme 'modus-vivendi t))
 
   (use-package all-the-icons
-	  :straight t
-	  :if (display-graphic-p))
+      :straight t
+      :if (display-graphic-p))
+
+  (use-package all-the-icons-completion
+    :straight t
+    :init
+    (all-the-icons-completion-mode)
+    :hook
+    (marginalia-mode . all-the-icons-completion-marginalia-setup))
+
+  (use-package all-the-icons-dired
+    :straight t
+    :hook
+    (dired-mode . all-the-icons-dired-mode))
+
+  (use-package all-the-icons-ibuffer
+    :straight t
+    :hook
+    (ibuffer-mode . all-the-icons-ibuffer-mode))
 
   (use-package doom-modeline
-	:straight t
-	:init (doom-modeline-mode 1))
+    :straight t
+    :init (doom-modeline-mode 1))
 #+end_src
 
 * Statistics/R
