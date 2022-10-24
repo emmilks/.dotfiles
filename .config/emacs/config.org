@@ -567,6 +567,13 @@ Completion engine that stays true to Emacs.
 	:hook ((inferior-python-mode-hook . hide-mode-line-mode)
 	       (inferior-ess-r-mode-hook . hide-mode-line-mode)))
     #+end_src
+    
+** Haskell
+#+begin_src emacs-lisp
+  (use-package haskell-mode
+    :straight t)
+#+end_src
+
 ** LSP Mode
 #+begin_src emacs-lisp
   (use-package lsp-mode
@@ -599,4 +606,12 @@ Completion engine that stays true to Emacs.
     :hook ((python-mode . (lambda ()
 			    (require 'lsp-pyright)
 			    (lsp-deferred)))))
+
+#+end_src
+*** Haskell LSP
+#+begin_src emacs-lisp
+  (use-package lsp-haskell
+    :straight t
+    :hook
+    (haskell-mode #'lsp))
 #+end_src

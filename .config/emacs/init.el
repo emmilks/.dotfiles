@@ -446,6 +446,9 @@
 :hook ((inferior-python-mode-hook . hide-mode-line-mode)
 	   (inferior-ess-r-mode-hook . hide-mode-line-mode)))
 
+(use-package haskell-mode
+  :straight t)
+
 (use-package lsp-mode
   :straight t
   :defer t
@@ -474,3 +477,8 @@
   :hook ((python-mode . (lambda ()
 			  (require 'lsp-pyright)
 			  (lsp-deferred)))))
+
+(use-package lsp-haskell
+  :straight t
+  :hook
+  (haskell-mode #'lsp))
