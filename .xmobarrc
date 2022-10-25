@@ -4,9 +4,9 @@ Config { overrideRedirect = False
        , fgColor  = "#f8f8f2"
        , position = TopW L 90
        , commands = [ Run Weather "KPTK"
-                        [ "--template", "<weather> <tempC>°C"
-                        , "-L", "0"
-                        , "-H", "25"
+                        [ "--template", "<weather> <tempF>°F"
+                        , "-L", "32"
+                        , "-H", "85"
                         , "--low"   , "lightblue"
                         , "--normal", "#f8f8f2"
                         , "--high"  , "red"
