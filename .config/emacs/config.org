@@ -225,14 +225,19 @@ Bring back . command from Vim.
           org-latex-pdf-process
           '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-    
+
     ;; Org babel
       (org-babel-do-load-languages
     'org-babel-load-languages
     '((emacs-lisp . t)
       (python . t)))
 
-  (setq org-confirm-babel-evaluate nil))
+  (setq org-confirm-babel-evaluate nil)
+  :hook
+  (org-mode . auto-fill-mode)
+  :bind
+  ("C-c a" . org-agenda)
+  ("C-c c" . org-capture))
 #+end_src
 
 ** Org Modern
@@ -301,24 +306,25 @@ Always kill current buffer. Let ibuffer handle the fancy stuff
 
 * Theme
 #+begin_src emacs-lisp
-  ;; (use-package doom-themes
-  ;;     :straight t
-  ;;     :config
-  ;;   ;; Global settings (defaults)
-  ;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-  ;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;;   (load-theme 'doom-one t)
+  (use-package doom-themes
+      :straight t
+      :config
+    ;; Global settings (defaults)
+    (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+          doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    (load-theme 'doom-gruvbox t)
 
-  ;;   ;; Enable flashing mode-line on errors
-  ;;   (doom-themes-visual-bell-config)
-  ;;   ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;;   ;;(doom-themes-neotree-config)
-  ;;   ;; Corrects (and improves) org-mode's native fontification.
-  ;;   (doom-themes-org-config))
-  (use-package modus-themes
-    :straight t
-    :config
-    (load-theme 'modus-vivendi t))
+    ;; Enable flashing mode-line on errors
+    (doom-themes-visual-bell-config)
+    ;; Enable custom neotree theme (all-the-icons must be installed!)
+    ;;(doom-themes-neotree-config)
+    ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config))
+
+  ;; (use-package modus-themes
+  ;;   :straight t
+  ;;   :config
+  ;;   (load-theme 'modus-vivendi t))
 
   (use-package all-the-icons
       :straight t
@@ -329,7 +335,7 @@ Always kill current buffer. Let ibuffer handle the fancy stuff
     :init
     (all-the-icons-completion-mode)
     :hook
-    (marginalia-mode . all-the-icons-completion-marginalia-setup))
+    (marginalia-mode . all-thne-icons-completion-marginalia-setup))
 
   (use-package all-the-icons-dired
     :straight t
@@ -653,6 +659,8 @@ Completion engine that stays true to Emacs.
 #+begin_src emacs-lisp
   (use-package lsp-haskell
     :straight t
+    :defer t
     :hook
-    (haskell-mode #'lsp))
+    (haskell-mode . lsp-mode)
+    (haskell-literate-mode . lsp-mode))
 #+end_src

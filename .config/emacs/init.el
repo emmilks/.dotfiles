@@ -179,7 +179,12 @@
   '((emacs-lisp . t)
     (python . t)))
 
-(setq org-confirm-babel-evaluate nil))
+(setq org-confirm-babel-evaluate nil)
+:hook
+(org-mode . auto-fill-mode)
+:bind
+("C-c a" . org-agenda)
+("C-c c" . org-capture))
 
 (use-package org-modern
   :straight t
@@ -521,5 +526,7 @@
 
 (use-package lsp-haskell
   :straight t
+  :defer t
   :hook
-  (haskell-mode #'lsp))
+  (haskell-mode . lsp-mode)
+  (haskell-literate-mode . lsp-mode))
