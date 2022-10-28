@@ -177,7 +177,8 @@
     (org-babel-do-load-languages
   'org-babel-load-languages
   '((emacs-lisp . t)
-    (python . t)))
+    (python . t)
+    (R . t)))
 
 (setq org-confirm-babel-evaluate nil)
 :hook
@@ -225,24 +226,20 @@
   :config
   (dired-async-mode 1))
 
-;; (use-package doom-themes
-;;     :straight t
-;;     :config
-;;   ;; Global settings (defaults)
-;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;   (load-theme 'doom-one t)
+(use-package doom-themes
+    :straight t
+    :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-gruvbox t)
 
-;;   ;; Enable flashing mode-line on errors
-;;   (doom-themes-visual-bell-config)
-;;   ;; Enable custom neotree theme (all-the-icons must be installed!)
-;;   ;;(doom-themes-neotree-config)
-;;   ;; Corrects (and improves) org-mode's native fontification.
-;;   (doom-themes-org-config))
-(use-package modus-themes
-  :straight t
-  :config
-  (load-theme 'modus-vivendi t))
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  ;;(doom-themes-neotree-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 (use-package all-the-icons
     :straight t
@@ -274,20 +271,11 @@
     :config
     (setq ess-indent-with-fancy-comments nil))
 
-(use-package projectile
-  :straight t
-  :init
-  (projectile-mode 1)
-  :config
-  ;; let projectile call make
-  (global-set-key (kbd "<f5>") 'projectile-compile-project))
-
 (use-package dashboard
   :straight t
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-items '((recents . 5)
-              (projects . 5))))
+  (setq dashboard-items '((recents . 5))))
 
 (use-package vertico
   :straight t
@@ -495,38 +483,5 @@
 (use-package haskell-mode
   :straight t)
 
-(use-package lsp-mode
-  :straight t
-  :defer t
-  :defines (lsp-keymap-prefix lsp-mode-map)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :custom
-  ;; Read the documentation for those variable with `C-h v'.
-  ;; This reduces the visual bloat that LSP sometimes generate.
-  (lsp-eldoc-enable-hover nil)
-  (lsp-signature-auto-activate nil)
-  (lsp-completion-enable t)
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
-  :commands (lsp lsp-deferred))
-
-(use-package lsp-pyright
-  :straight t
-  :defer t
-  :custom
-  (lsp-pyright-disable-language-service nil)
-  (lsp-pyright-disable-organize-imports nil)
-  (lsp-pyright-auto-import-completions t)
-  (lsp-pyright-use-library-code-for-types t)
-  (lsp-completion-enable t)
-  ;; Launches pyright when a python buffer is opened.
-  :hook ((python-mode . (lambda ()
-			  (require 'lsp-pyright)
-			  (lsp-deferred)))))
-
-(use-package lsp-haskell
-  :straight t
-  :defer t
-  :hook
-  (haskell-mode . lsp-mode)
-  (haskell-literate-mode . lsp-mode))
+(use-package eglot
+  :straight t)
