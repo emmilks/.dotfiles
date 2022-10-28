@@ -59,6 +59,8 @@ myConfig = def
     , terminal = "termonad" -- set terminal
     , layoutHook = myLayout
     , manageHook = myManageHook
+    , focusedBorderColor = "#83a598"
+    , normalBorderColor = "#a89984"
     
   }
   `additionalKeysP`
