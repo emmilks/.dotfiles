@@ -608,3 +608,18 @@ Completion engine that stays true to Emacs.
   (use-package eglot
     :straight t)
    #+end_src
+* Markup
+** Auctex
+   #+begin_src emacs-lisp
+  (use-package auctex
+    :straight t
+    :defer t)
+   #+end_src
+** Markdown
+   #+begin_src emacs-lisp
+   (use-package markdown-mode
+  :straight t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
+   #+end_src
+$$ f(x) = x^2$$

@@ -485,3 +485,12 @@
 
 (use-package eglot
   :straight t)
+
+(use-package auctex
+  :straight t
+  :defer t)
+
+(use-package markdown-mode
+:straight t
+:mode ("README\\.md\\'" . gfm-mode)
+:init (setq markdown-command "multimarkdown"))
