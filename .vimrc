@@ -5,20 +5,15 @@ syntax on
 filetype plugin on
 
 " Only load plugins if Plug is detected
-if filereadable(expand("~/.vim/autoload/plug.vim"))
+if filereadable(expand("$HOME/.vim/autoload/plug.vim"))
     call plug#begin('~/.vim/plugged')
     Plug 'sheerun/vim-polyglot'
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'vim-pandoc/vim-pandoc'
-    "Plug 'rwxrob/vim-pandoc-syntax-simple'
     Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'morhetz/gruvbox'
-    "#Plug 'vimwiki/vimwiki'
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'junegunn/goyo.vim'
     Plug 'itchyny/lightline.vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
     call plug#end()
 endif
 
@@ -28,6 +23,13 @@ if !has('gui_running')
     set t_Co=256
 endif
 
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+set wildmenu
+
+"Autocompletion
+set wildmode=longest,list,full
 
 autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
@@ -50,6 +52,10 @@ autocmd InsertEnter * norm zz
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
+" Format python files on save
+autocmd BufWritePost *.py !black %
+autocmd BufWritePost *.py !isort %
+"
 "Shortcutting split navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -59,24 +65,6 @@ map <C-l> <C-w>l
 "Shortcut split opening
 nnoremap <leader>h :split<Space>
 nnoremap <leader>v :vsplit<Space>
-
-" FZF
-" b = buffers
-nnoremap 'b  :Buffers<cr>
-" c = config
-nnoremap 'c  :Files ~/.config/<cr>
-" d = documents
-nnoremap 'd  :Files ~/Documents/<cr>
-" f = fzf
-nnoremap 'f  :Files<cr>
-" h = home
-nnoremap 'h  :Files ~/<cr>
-" n = notes
-nnoremap 'n  :Files $NOTES_DIR/<cr>
-" t = tags
-nnoremap 't  :Tags<cr>
-" p = pwd
-nnoremap <leader>p :Files %:p:h<CR>
 
 " Vim Options
 set background=dark
@@ -99,8 +87,6 @@ set smartcase
 set encoding=utf-8
 set incsearch
 
-"Autocompletion
-set wildmode=longest,list,full
 
 "Fix splitting
 set splitbelow splitright
