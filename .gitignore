@@ -11,3 +11,7 @@
 .config/emacs/tutorial/
 .config/emacs/var/
 .config/emacs/straight
+.config/emacs/_minted-config/
+
+
+
