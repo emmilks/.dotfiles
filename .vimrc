@@ -4,24 +4,23 @@ set number relativenumber
 syntax on
 filetype plugin on
 
-
+" Only load plugins if Plug is detected
 if filereadable(expand("~/.vim/autoload/plug.vim"))
+    call plug#begin('~/.vim/plugged')
+    Plug 'sheerun/vim-polyglot'
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'vim-pandoc/vim-pandoc'
+    "Plug 'rwxrob/vim-pandoc-syntax-simple'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+    Plug 'morhetz/gruvbox'
+    "#Plug 'vimwiki/vimwiki'
+    Plug 'dhruvasagar/vim-table-mode'
+    Plug 'junegunn/goyo.vim'
+    Plug 'itchyny/lightline.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    call plug#end()
 endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-pandoc/vim-pandoc'
-"Plug 'rwxrob/vim-pandoc-syntax-simple'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'morhetz/gruvbox'
-"#Plug 'vimwiki/vimwiki'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'junegunn/goyo.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-call plug#end()
 
 " Vim lightline plugin
 set laststatus=2
