@@ -136,6 +136,7 @@
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python :results output"))
+  (add-to-list 'org-structure-template-alist '("R" . "src R"))
 
   (setq org-directory (expand-file-name "~/Storage/Org"))
 
