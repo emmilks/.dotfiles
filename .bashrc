@@ -106,3 +106,7 @@ recent() {
 fold_sed() {
     find . -type f -name '*.md' -exec sed -i 's/(id.*)//g' {} \;
 }
+
+backup() {
+    rsync -avp --human-readable --whole-file /home/eric/Storage/ /media/eric/Backup/Backup/
+}
