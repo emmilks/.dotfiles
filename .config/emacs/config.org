@@ -610,7 +610,9 @@ Completion engine that stays true to Emacs.
 ** Eglot
    #+begin_src emacs-lisp
   (use-package eglot
-    :straight t)
+    :straight t
+    :hook
+    (python-mode . eglot-ensure))
    #+end_src
 * Markup
 ** Auctex
