@@ -2,6 +2,8 @@
 .config/emacs/recentf
 .config/emacs/*.org~
 .config/emacs/*.el~
+.config/emacs/snippets/
+
 
 .config/emacs/auto-save-list/
 .config/emacs/elpa/
