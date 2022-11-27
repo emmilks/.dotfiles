@@ -127,14 +127,14 @@ backup() {
     rsync -avp --human-readable --whole-file /home/eric/Storage/ /media/eric/Backup/Backup/
 }
 
-sync() {
+file-sync() {
     rsync -avp $1 $2:$3
 }
 
-sync-ms-lt() {
+ms-sync-lt() {
     rsync -avp $HOME/Documents/MSDS/ desktop:$HOME/Storage/Documents/MSDS/
 }
 
-sync-ms-dt() {
+ms-sync-dt() {
     rsync -avp $HOME/Storage/Documents/MSDS/ laptop:$HOME/Documents/MSDS/
 }
