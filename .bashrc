@@ -126,3 +126,7 @@ fold_sed() {
 backup() {
     rsync -avp --human-readable --whole-file /home/eric/Storage/ /media/eric/Backup/Backup/
 }
+
+sync() {
+    rsync -avp $1 $2:$3
+}
