@@ -582,22 +582,24 @@ Completion engine that stays true to Emacs.
     :straight t
     :config
     ;; Remove guess indent python message
-    (setq python-indent-guess-indent-offset-verbose nil))
+    (setq python-indent-guess-indent-offset-verbose nil)
+    (setq python-shell-interpreter "ipython3"
+          python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True"))
    #+end_src
 *** Blacken
 	#+begin_src emacs-lisp
 	  (use-package blacken
 		:straight t
 		:defer t
-		:hook (python-mode-hook . blacken-mode))
+		:hook (python-mode . blacken-mode))
 	#+end_src
 *** Highlight-Mode-Line
     #+begin_src emacs-lisp
       (use-package hide-mode-line
 	:straight t
 	:defer t
-	:hook ((inferior-python-mode-hook . hide-mode-line-mode)
-	       (inferior-ess-r-mode-hook . hide-mode-line-mode)))
+	:hook ((inferior-python-mode . hide-mode-line-mode)
+	       (inferior-ess-r-mode . hide-mode-line-mode)))
     #+end_src
     
 ** Haskell
