@@ -578,10 +578,11 @@ Completion engine that stays true to Emacs.
 ** Python
 *** Python Mode
    #+begin_src emacs-lisp
-	 (use-package python
-	   :config
-	   ;; Remove guess indent python message
-	   (setq python-indent-guess-indent-offset-verbose nil))
+  (use-package python
+    :straight t
+    :config
+    ;; Remove guess indent python message
+    (setq python-indent-guess-indent-offset-verbose nil))
    #+end_src
 *** Blacken
 	#+begin_src emacs-lisp

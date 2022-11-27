@@ -466,6 +466,7 @@
   (setq flycheck-check-syntax-automatically '(mode-enabled save)))
 
 (use-package python
+  :straight t
   :config
   ;; Remove guess indent python message
   (setq python-indent-guess-indent-offset-verbose nil))
