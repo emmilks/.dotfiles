@@ -130,3 +130,11 @@ backup() {
 sync() {
     rsync -avp $1 $2:$3
 }
+
+sync-ms-lt() {
+    rsync -avp $HOME/Documents/MSDS/ desktop:$HOME/Storage/Documents/MSDS/
+}
+
+sync-ms-dt() {
+    rsync -avp $HOME/Storage/Documents/MSDS/ laptop:$HOME/Documents/MSDS/
+}
