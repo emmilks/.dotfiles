@@ -469,30 +469,60 @@
   :straight t
   :config
   ;; Remove guess indent python message
-  (setq python-indent-guess-indent-offset-verbose nil))
+  (setq python-indent-guess-indent-offset-verbose nil)
+  (setq python-shell-interpreter "ipython3"
+        python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True"))
 
 (use-package blacken
   :straight t
   :defer t
-  :hook (python-mode-hook . blacken-mode))
+  :hook (python-mode . blacken-mode))
 
 (use-package hide-mode-line
 :straight t
 :defer t
-:hook ((inferior-python-mode-hook . hide-mode-line-mode)
-	   (inferior-ess-r-mode-hook . hide-mode-line-mode)))
+:hook ((inferior-python-mode . hide-mode-line-mode)
+	   (inferior-ess-r-mode . hide-mode-line-mode)))
 
 (use-package haskell-mode
   :straight t)
 
 (use-package eglot
-  :straight t)
+  :straight t
+  :hook
+  (python-mode . eglot-ensure))
 
 (use-package auctex
   :straight t
   :defer t)
 
 (use-package markdown-mode
-:straight t
-:mode ("README\\.md\\'" . gfm-mode)
-:init (setq markdown-command "multimarkdown"))
+  :straight t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
+
+(use-package yasnippet
+  :straight t
+  :config
+  (setq yas-snippet-dirs '("~/.config/emacs/snippets/"))
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :straight t
+  :after yasnippet)
+
+(use-package tree-sitter
+  :straight t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :straight t
+  :after tree-sitter)
+
+(use-package tree-sitter-ess-r
+  :straight t
+  :after tree-sitter
+  :config
+  (add-hook 'ess-r-mode-hook 'tree-sitter-ess-r-mode-activate))

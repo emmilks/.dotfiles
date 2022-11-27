@@ -623,9 +623,41 @@ Completion engine that stays true to Emacs.
    #+end_src
 ** Markdown
    #+begin_src emacs-lisp
-   (use-package markdown-mode
-  :straight t
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
+  (use-package markdown-mode
+    :straight t
+    :mode ("README\\.md\\'" . gfm-mode)
+    :init (setq markdown-command "multimarkdown"))
    #+end_src
+* Snippets
 
+** Yasnippets
+   #+begin_src emacs-lisp
+  (use-package yasnippet
+    :straight t
+    :config
+    (setq yas-snippet-dirs '("~/.config/emacs/snippets/"))
+    (yas-global-mode 1))
+
+  (use-package yasnippet-snippets
+    :straight t
+    :after yasnippet)
+   #+end_src
+* Tree Sitter
+  #+begin_src emacs-lisp
+  (use-package tree-sitter
+    :straight t
+    :config
+    (global-tree-sitter-mode)
+    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+  (use-package tree-sitter-langs
+    :straight t
+    :after tree-sitter)
+
+  (use-package tree-sitter-ess-r
+    :straight t
+    :after tree-sitter
+    :config
+    (add-hook 'ess-r-mode-hook 'tree-sitter-ess-r-mode-activate))
+
+  #+end_src
