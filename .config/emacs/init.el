@@ -484,6 +484,12 @@
 :hook ((inferior-python-mode . hide-mode-line-mode)
 	   (inferior-ess-r-mode . hide-mode-line-mode)))
 
+(use-package poetry
+  :straight t)
+
+(use-package pyvenv
+  :straight t)
+
 (use-package haskell-mode
   :straight t)
 

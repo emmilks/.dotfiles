@@ -601,7 +601,19 @@ Completion engine that stays true to Emacs.
 	:hook ((inferior-python-mode . hide-mode-line-mode)
 	       (inferior-ess-r-mode . hide-mode-line-mode)))
     #+end_src
-    
+*** Poetry
+    #+begin_src emacs-lisp
+  (use-package poetry
+    :straight t)
+    #+end_src
+*** Pyvenv
+    #+begin_src emacs-lisp
+  (use-package pyvenv
+    :straight t)
+    #+end_src
+
+
+
 ** Haskell
 #+begin_src emacs-lisp
   (use-package haskell-mode
