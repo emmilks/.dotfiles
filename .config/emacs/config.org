@@ -613,7 +613,7 @@ Completion engine that stays true to Emacs.
 ** Python
 *** Python Mode
    #+begin_src emacs-lisp
-  (use-package python
+  (use-package python-mode
     :straight t
     :config
     ;; Remove guess indent python message

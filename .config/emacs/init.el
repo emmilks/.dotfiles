@@ -495,7 +495,7 @@
   :config
   (setq flycheck-check-syntax-automatically '(mode-enabled save)))
 
-(use-package python
+(use-package python-mode
   :straight t
   :config
   ;; Remove guess indent python message
