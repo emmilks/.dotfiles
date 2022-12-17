@@ -5,3 +5,5 @@
 	email = emmilks@yahoo.com
 [init]
 	defaultBranch = main
+[credential]
+	helper = cache
