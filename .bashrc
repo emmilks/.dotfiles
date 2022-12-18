@@ -8,7 +8,7 @@ case $- in
       *) return;;
 esac
 
-source .bash_aliases
+source $HOME/.bash_aliases
 
 export PATH="$HOME/.local/bin/:$HOME/.opam/default/bin/:$PATH"
 export NOTES_DIR="$HOME/Storage/Notes/"
