@@ -48,6 +48,7 @@
         term-mode-hook
         info-mode-hook
         text-mode-hook
+        vterm-mode-hook
         shell-mode-hook
         eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0 ))))
@@ -208,11 +209,6 @@
   :hook
   (org-mode . org-modern-mode)
   (org-agenda-finalize . org-modern-agenda))
-
-;; (use-package org-auto-tangle
-;;  :straight t
-;;  :defer t
-;;  :hook (org-mode . org-auto-tangle-mode))
 
 (use-package rainbow-mode
   :straight t
