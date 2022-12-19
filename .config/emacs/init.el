@@ -48,6 +48,7 @@
         term-mode-hook
         info-mode-hook
         text-mode-hook
+        vterm-mode-hook
         shell-mode-hook
         eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0 ))))
@@ -76,18 +77,35 @@
   (before-save-hook . whitespace-cleanup))
   (load-file custom-file)
 
-(defun em/kill-inner-word ()
-  "Kills the entire word your cursor is in. Equivalent to 'ciw' in vim."
-  (interactive)
-  (forward-char 1)
-  (backward-word)
-  (kill-word 1))
-(global-set-key (kbd "C-c w k") 'em/kill-inner-word)
-
 (defun config-visit ()
   (interactive)
   (find-file "~/.config/emacs/config.org"))
 (global-set-key (kbd "C-c e") 'config-visit)
+
+(use-package evil
+:straight t
+:init
+(setq evil-want-integration t)
+(setq evil-want-keybinding nil)
+(setq evil-want-C-u-scroll t)
+(setq evil-want-C-i-jump nil)
+:config
+(evil-mode 1)
+(define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+(define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+;; Use visual line motions even outside of visual-line-mode buffers
+(evil-global-set-key 'motion "j" 'evil-next-visual-line)
+(evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+(evil-set-initial-state 'messages-buffer-mode 'normal)
+(evil-set-initial-state 'dashboard-mode 'normal))
+
+(use-package evil-collection
+  :straight t
+  :after evil
+  :config
+  (evil-collection-init))
 
 (defun split-and-follow-horizontally ()
   (interactive)
@@ -124,11 +142,6 @@
   :hook
   (dired-mode . auto-revert-mode)
   (dired-mode . dired-hide-details-mode))
-
-(use-package dot-mode
-  :straight t
-  :config
-  (global-dot-mode t))
 
 ;; This is needed as of Org 9.2
   (require 'org-tempo)
@@ -196,11 +209,6 @@
   :hook
   (org-mode . org-modern-mode)
   (org-agenda-finalize . org-modern-agenda))
-
-;; (use-package org-auto-tangle
-;;  :straight t
-;;  :defer t
-;;  :hook (org-mode . org-auto-tangle-mode))
 
 (use-package rainbow-mode
   :straight t
@@ -495,7 +503,7 @@
   :config
   (setq flycheck-check-syntax-automatically '(mode-enabled save)))
 
-(use-package python
+(use-package python-mode
   :straight t
   :config
   ;; Remove guess indent python message

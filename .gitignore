@@ -15,5 +15,5 @@
 .config/emacs/straight
 .config/emacs/_minted-config/
 
-
-
+.newsboat/cache.db
+.newsboat/cache.db.lock

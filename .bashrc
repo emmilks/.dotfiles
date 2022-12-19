@@ -8,10 +8,12 @@ case $- in
       *) return;;
 esac
 
-source .bash_aliases
+source $HOME/.bash_aliases
 
 export PATH="$HOME/.local/bin/:$HOME/.opam/default/bin/:$PATH"
 export NOTES_DIR="$HOME/Storage/Notes/"
+export MANWIDTH=100
+export LESS="-rcqaix4"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
